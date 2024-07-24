@@ -24,3 +24,11 @@ const reviews = [
     },
 ]
 
+// Solution 
+function showReviewTotal(value: number) {
+    if (reviewTotalDisplay) {
+        reviewTotalDisplay!.innerHTML = `Total Reviews: ${value}`
+    }
+}
+
+showReviewTotal(reviews.length)
