@@ -25,14 +25,20 @@ const reviews = [
 ]
 
 // Solution 
-const returningUser = document.querySelector('#returning-user');
 
-function showReviewTotal(value: number, name: string) {
-    if (reviewTotalDisplay && value) {
-        reviewTotalDisplay!.innerHTML = `Total Reviews: ${value}`
-    }
-    if (returningUser && name) {
-        returningUser!.innerHTML = `Last reviewed By - ${name}`
+function showReviewTotal(value: number, name: string, isLoyaltyUser: boolean = false) {
+    if (reviewTotalDisplay) {
+        let valueString = ""
+        if (value) {
+            valueString = `Total Reviews: ${value}`
+        }
+        if (name) {
+            if (valueString) {
+                valueString = `${valueString} | `
+            }
+            valueString = `Last reviewed By - ${name} ${isLoyaltyUser ? '⭐' : ''}`
+        }
+        reviewTotalDisplay!.innerHTML = valueString
     }
 }
 
