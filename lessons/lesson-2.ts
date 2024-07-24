@@ -3,7 +3,7 @@
 // Primitives:
 // Boolean : true, false
 // Number : 10000,-200,3,4,5,1.0,-2,-0.25,-0.00000004
-// String : "hello", "world"
+// String : "hello", "world", 'hello', "world", `hello ${userName}`
 // 
 
 
