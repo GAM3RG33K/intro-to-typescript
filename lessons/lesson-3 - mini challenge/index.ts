@@ -43,4 +43,4 @@ function showReviewTotal(value: number, name: string, isLoyaltyUser: boolean = f
 }
 
 
-showReviewTotal(reviews.length, 'Sheia')
+showReviewTotal(reviews.length, reviews[0].name, reviews[0].loyaltyUser)
