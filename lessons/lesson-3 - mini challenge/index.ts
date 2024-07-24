@@ -25,10 +25,16 @@ const reviews = [
 ]
 
 // Solution 
-function showReviewTotal(value: number) {
-    if (reviewTotalDisplay) {
+const returningUser = document.querySelector('#returning-user');
+
+function showReviewTotal(value: number, name: string) {
+    if (reviewTotalDisplay && value) {
         reviewTotalDisplay!.innerHTML = `Total Reviews: ${value}`
+    }
+    if (returningUser && name) {
+        returningUser!.innerHTML = `Last reviewed By - ${name}`
     }
 }
 
-showReviewTotal(reviews.length)
+
+showReviewTotal(reviews.length, 'Sheia')
