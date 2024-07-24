@@ -1,3 +1,11 @@
+// Note: command to compile ts to js & open the html file in browser
+
+// tsc index.ts --outFile index.pack.js
+// open index.html
+
+// Combined command: tsc index.ts --outFile index.pack.js && open index.html
+
+
 // Number Types mini-challenge
 // Write a function that will only accept numbers and attend to 
 // all 'any' TypeScript weakness flags.
@@ -39,7 +47,7 @@ function showReviewTotal(value: number, name: string, isLoyaltyUser: boolean = f
             if (valueString) {
                 valueString = `${valueString} | `
             }
-            valueString = `Last reviewed By - ${name} ${isLoyaltyUser ? '⭐' : ''}`
+            valueString = `${valueString}Last reviewed By - ${name} ${isLoyaltyUser ? '⭐' : ''}`
         }
         reviewTotalDisplay!.innerHTML = valueString
     }
@@ -61,4 +69,4 @@ function populateUser(isReturning: boolean, userName: string) {
     userNameDisplay!.innerHTML = userName
 }
 
-populateUser(you.isReturning, you.userName.firstName)
+populateUser(you.isReturning, you.userName)
