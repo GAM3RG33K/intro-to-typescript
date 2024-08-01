@@ -1,4 +1,20 @@
-define("utils", ["require", "exports"], function (require, exports) {
+define("enums", ["require", "exports"], function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.LoyaltyUser = exports.Permissions = void 0;
+    var Permissions;
+    (function (Permissions) {
+        Permissions["ADMIN"] = "ADMIN";
+        Permissions["READ_ONLY"] = "READ_ONLY";
+    })(Permissions || (exports.Permissions = Permissions = {}));
+    var LoyaltyUser;
+    (function (LoyaltyUser) {
+        LoyaltyUser["GOLD_USER"] = "GOLD_USER";
+        LoyaltyUser["SILVER_USER"] = "SILVER_USER";
+        LoyaltyUser["BRONZE_USER"] = "BRONZE_USER";
+    })(LoyaltyUser || (exports.LoyaltyUser = LoyaltyUser = {}));
+});
+define("utils", ["require", "exports", "enums"], function (require, exports, enums_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.showReviewTotal = showReviewTotal;
@@ -7,7 +23,7 @@ define("utils", ["require", "exports"], function (require, exports) {
     var returningUserDisplay = document.querySelector('#returning-user');
     var userNameDisplay = document.querySelector('#user');
     function showReviewTotal(value, reviewer, isLoyalty) {
-        var iconDisplay = isLoyalty ? '⭐' : '';
+        var iconDisplay = enums_1.LoyaltyUser.GOLD_USER ? '⭐' : '';
         reviewTotalDisplay.innerHTML = 'review total ' + value.toString() + '| last reviewed by ' + reviewer + ' ' + iconDisplay;
     }
     function populateUser(isReturning, userName) {
@@ -17,105 +33,102 @@ define("utils", ["require", "exports"], function (require, exports) {
         userNameDisplay.innerHTML = userName;
     }
 });
-define("index", ["require", "exports", "utils"], function (require, exports, utils_1) {
+// Enum Types mini-challenge
+// Replace the value of loyaltyUser to a GOLD_USER, SILVER_USER or BRONZE_USER, making sure to
+// use what we learnt about Enums in the previous lesson. Make Sheia GOLD, Andrzej BRONZE 
+// and Omar SILVER.
+// 2. export the enum
+// 3. Fix the function in the utils to show Sheias star as she is a GOLD_USER.
+define("index", ["require", "exports", "utils", "enums"], function (require, exports, utils_1, enums_2) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    function main_7() {
-        // Note: command to compile ts to js & open the html file in browser
-        // tsc index.ts --outFile index.pack.js
-        // open index.html
-        // Combined command: tsc index.ts utils.ts --module amd --outFile index.pack.js && open index.html
-        // Tuple Types
-        // 1. Replace the contact values to take an array that contains a
-        // phone number and email.
-        // 2. Check the inferred Type that appears in the Object Type.
-        // 3. Overwrite the inferred type to be a Tuple.
-        var propertyContainer = document.querySelector('.properties');
-        var isOpen;
-        // Reviews
-        var reviews = [
-            {
-                name: 'Sheia',
-                stars: 5,
-                loyaltyUser: true,
-                date: '01-04-2021'
+    var propertyContainer = document.querySelector('.properties');
+    var footer = document.querySelector('.footer');
+    var isOpen;
+    // Reviews
+    var reviews = [
+        {
+            name: 'Sheia',
+            stars: 5,
+            loyaltyUser: enums_2.LoyaltyUser.GOLD_USER,
+            date: '01-04-2021'
+        },
+        {
+            name: 'Andrzej',
+            stars: 3,
+            loyaltyUser: enums_2.LoyaltyUser.BRONZE_USER,
+            date: '28-03-2021'
+        },
+        {
+            name: 'Omar',
+            stars: 4,
+            loyaltyUser: enums_2.LoyaltyUser.SILVER_USER,
+            date: '27-03-2021'
+        },
+    ];
+    var you = {
+        firstName: 'Bobby',
+        lastName: 'Brown',
+        permissions: enums_2.Permissions.ADMIN,
+        isReturning: true,
+        age: 35,
+        stayedAt: ['florida-home', 'oman-flat', 'tokyo-bungalow']
+    };
+    // Array of Properties
+    var properties = [
+        {
+            image: 'images/colombia-property.jpg',
+            title: 'Colombian Shack',
+            price: 45,
+            location: {
+                firstLine: 'shack 37',
+                city: 'Bogota',
+                code: 45632,
+                country: 'Colombia'
             },
-            {
-                name: 'Andrzej',
-                stars: 3,
-                loyaltyUser: false,
-                date: '28-03-2021'
+            contact: [+112343823978921, 'marywinkle@gmail.com'],
+            isAvailable: true
+        },
+        {
+            image: 'images/poland-property.jpg',
+            title: 'Polish Cottage',
+            price: 34,
+            location: {
+                firstLine: 'no 23',
+                city: 'Gdansk',
+                code: 343903,
+                country: 'Poland'
             },
-            {
-                name: 'Omar',
-                stars: 4,
-                loyaltyUser: true,
-                date: '27-03-2021'
+            contact: [+1298239028490830, 'garydavis@hotmail.com'],
+            isAvailable: false
+        },
+        {
+            image: 'images/london-property.jpg',
+            title: 'London Flat',
+            price: 23,
+            location: {
+                firstLine: 'flat 15',
+                city: 'London',
+                code: 35433,
+                country: 'United Kingdom',
             },
-        ];
-        // User
-        var you = {
-            firstName: 'Bobby',
-            lastName: 'Brown',
-            isReturning: true,
-            age: 35,
-            stayedAt: ['florida-home', 'oman-flat', 'tokyo-bungalow']
-        };
-        // Array of Properties
-        var properties = [
-            {
-                image: 'images/colombia-property.jpg',
-                title: 'Colombian Shack',
-                price: 45,
-                location: {
-                    firstLine: 'shack 37',
-                    city: 'Bogota',
-                    code: 45632,
-                    country: 'Colombia'
-                },
-                contact: [+1123495082908, 'marywinkle@gmail.com'],
-                isAvailable: true
-            },
-            {
-                image: 'images/poland-property.jpg',
-                title: 'Polish Cottage',
-                price: 34,
-                location: {
-                    firstLine: 'no 23',
-                    city: 'Gdansk',
-                    code: 343903,
-                    country: 'Poland'
-                },
-                contact: [+1123495082908, 'garydavis@hotmail.com'],
-                isAvailable: false
-            },
-            {
-                image: 'images/london-property.jpg',
-                title: 'London Flat',
-                price: 23,
-                location: {
-                    firstLine: 'flat 15',
-                    city: 'London',
-                    code: 35433,
-                    country: 'United Kingdom',
-                },
-                contact: [+1123495082908, 'andyluger@aol.com'],
-                isAvailable: true
-            }
-        ];
-        // Functions
-        (0, utils_1.showReviewTotal)(reviews.length, reviews[0].name, reviews[0].loyaltyUser);
-        (0, utils_1.populateUser)(you.isReturning, you.firstName);
-        // Add the properties
-        for (var i = 0; i < properties.length; i++) {
-            var card = document.createElement('div');
-            card.classList.add('card');
-            card.innerHTML = properties[i].title;
-            var image = document.createElement('img');
-            image.setAttribute('src', properties[i].image);
-            card.appendChild(image);
-            propertyContainer.appendChild(card);
+            contact: [+34829374892553, 'andyluger@aol.com'],
+            isAvailable: true
         }
+    ];
+    // Functions
+    (0, utils_1.showReviewTotal)(reviews.length, reviews[0].name, reviews[0].loyaltyUser);
+    (0, utils_1.populateUser)(you.isReturning, you.firstName);
+    // Add the properties
+    for (var i = 0; i < properties.length; i++) {
+        var card = document.createElement('div');
+        card.classList.add('card');
+        card.innerHTML = properties[i].title;
+        var image = document.createElement('img');
+        image.setAttribute('src', properties[i].image);
+        card.appendChild(image);
+        propertyContainer.appendChild(card);
     }
-    main_7();
+    var currentLocation = ['London', '11.03', 17];
+    footer.innerHTML = currentLocation[0] + ' ' + currentLocation[1] + ' ' + currentLocation[2] + '°';
 });
