@@ -22,7 +22,7 @@ function main_6() {
             zipCode: string;
             country: string;
         };
-        contactDetails: string;
+        contactDetails: [phone: string, email: string];
         availableToRent: boolean;
     };
 
@@ -37,7 +37,7 @@ function main_6() {
                 zipCode: "75001",
                 country: "France",
             },
-            contactDetails: "+49 123 456 789",
+            contactDetails: ["+49 123 456 789", "paris.couchsurfers@example.com"],
             availableToRent: true
         },
         {
@@ -51,12 +51,12 @@ function main_6() {
                 zipCode: "12345",
                 country: "Germany",
             },
-            contactDetails: "+49 123 456 789",
+            contactDetails: ["+49 123 456 789", "berlin.couchsurfers@example.com"],
             availableToRent: false
         }
     ];
 
-    
+
 }
 
 main_6();
